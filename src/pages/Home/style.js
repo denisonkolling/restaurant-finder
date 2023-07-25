@@ -1,7 +1,44 @@
-import style from 'styled-components';
+import { styled } from 'styled-components';
 
-export const Container = style.div`
-background-color: ${(props) => props.theme.colors.primary};
-width: 50%;
-text-align: center;
+export const Wrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+`;
+
+export const Container = styled.aside`
+	background-color: ${(props) => props.theme.colors.background};
+	width: 360px;
+	height: 100vh;
+	overflow-y: scroll;
+`;
+
+export const Search = styled.section`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #ffffff;
+	padding: 16px;
+`;
+
+export const Logo = styled.img`
+	margin-bottom: 15px;
+	width: 80%;
+	padding: 2rem;
+`;
+export const Button = styled.button`
+	height: 55px;
+	margin-left: 5px;
+`;
+
+export const Map = styled.div`
+background-color: grey;
+width: 75%;
+`
+export const CarouselTitle = styled.h1`
+font-family: ${(props) => props.theme.fonts.regular};
+color: ${(props) => props.theme.colors.text}
+font-size: 24px;
+font-weight: bold;
+line-height: 29px;
+margin: 16px;
 `
