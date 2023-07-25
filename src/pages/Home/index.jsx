@@ -7,6 +7,7 @@ import {
 	Wrapper,
 	Map,
 	CarouselTitle,
+	Carousel
 } from './style';
 import logo from '../../assets/logo.svg';
 import { TextField } from '@mui/material';
@@ -14,6 +15,7 @@ import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import restaurante from '../../assets/restaurante-fake.png';
 import Slider from 'react-slick';
+import { Card } from '../../components';
 
 const Home = () => {
 	const [input, setInput] = useState('');
@@ -42,26 +44,14 @@ const Home = () => {
 							<SearchIcon />
 						</Button>
 						<CarouselTitle>Na sua Área</CarouselTitle>
-						<Slider {...settings}>
-							<div>
-								<img src={restaurante} width="50" alt="restaurante" />
-							</div>
-							<div>
-								<img src={restaurante} width="50" alt="restaurante" />
-							</div>
-							<div>
-								<img src={restaurante} width="50" alt="restaurante" />
-							</div>
-							<div>
-								<img src={restaurante} width="50" alt="restaurante" />
-							</div>
-							<div>
-								<img src={restaurante} width="50" alt="restaurante" />
-							</div>
-							<div>
-								<img src={restaurante} width="50" alt="restaurante" />
-							</div>
-						</Slider>
+						<Carousel {...settings}>
+							<Card photo={restaurante} title='Nome'/>
+							<Card photo={restaurante} title='Nome'/>
+							<Card photo={restaurante} title='Nome'/>
+							<Card photo={restaurante} title='Nome'/>
+							<Card photo={restaurante} title='Nome'/>
+							<Card photo={restaurante} title='Nome'/>
+						</Carousel>
 					</div>
 				</Search>
 			</Container>
