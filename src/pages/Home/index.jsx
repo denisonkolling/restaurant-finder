@@ -13,12 +13,13 @@ import logo from '../../assets/logo.svg';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import restaurante from '../../assets/restaurante-fake.png';
+import image from '../../assets/restaurante-fake.png';
 import Slider from 'react-slick';
-import { Card } from '../../components';
+import { Card, RestaurantCard, Modal } from '../../components';
 
 const Home = () => {
 	const [input, setInput] = useState('');
+	const [modalOpened, setModalOpened] = useState(false)
 
 	const settings = {
 		dots: false,
@@ -45,17 +46,20 @@ const Home = () => {
 						</Button>
 						<CarouselTitle>Na sua Área</CarouselTitle>
 						<Carousel {...settings}>
-							<Card photo={restaurante} title='Nome'/>
-							<Card photo={restaurante} title='Nome'/>
-							<Card photo={restaurante} title='Nome'/>
-							<Card photo={restaurante} title='Nome'/>
-							<Card photo={restaurante} title='Nome'/>
-							<Card photo={restaurante} title='Nome'/>
+							<Card photo={image} title='Nome'/>
+							<Card photo={image} title='Nome'/>
+							<Card photo={image} title='Nome'/>
+							<Card photo={image} title='Nome'/>
+							<Card photo={image} title='Nome'/>
+							<Card photo={image} title='Nome'/>
 						</Carousel>
+						<button onClick={()=> setModalOpened(true)}>Abrir Modal</button>
 					</div>
 				</Search>
+				<RestaurantCard />
 			</Container>
 			<Map />
+			<Modal open={modalOpened} onClose={()=> setModalOpened(!modalOpened)}/>
 		</Wrapper>
 	);
 };

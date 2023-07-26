@@ -23,8 +23,7 @@ export const Search = styled.section`
 
 export const Logo = styled.img`
 	margin-bottom: 15px;
-	width: 80%;
-	padding: 2rem;
+	width: 50%;
 `;
 export const Button = styled.button`
 	height: 55px;
@@ -34,19 +33,20 @@ export const Button = styled.button`
 export const Map = styled.div`
 	background-color: grey;
 	width: 75%;
-`;
+	border: 1px solid purple;
+	`;
 
 export const Carousel = styled(Slider)`
 	.slick-slide {
 		margin-right: 16px;
 	}
-`;
+	`;
 
 export const CarouselTitle = styled.h1`
 font-family: ${(props) => props.theme.fonts.regular};
-color: ${(props) => props.theme.colors.text}
+color: ${(props) => props.theme.colors.text};
 font-size: 24px;
 font-weight: bold;
 line-height: 29px;
-margin: 16px;
+margin: 16px 0px 16px ;
 `;
