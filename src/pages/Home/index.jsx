@@ -5,7 +5,6 @@ import {
 	Logo,
 	Button,
 	Wrapper,
-	Map,
 	CarouselTitle,
 	Carousel
 } from './style';
@@ -15,7 +14,7 @@ import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import image from '../../assets/restaurante-fake.png';
 import Slider from 'react-slick';
-import { Card, RestaurantCard, Modal } from '../../components';
+import { Card, RestaurantCard, Modal, Map } from '../../components';
 
 const Home = () => {
 	const [input, setInput] = useState('');
