@@ -9,9 +9,9 @@ import {
 import ReactStars from 'react-rating-stars-component';
 import image from '../../assets/restaurante-fake.png';
 
-const RestaurantCard = ({ restaurant }) => {
+const RestaurantCard = ({ restaurant, onClick }) => {
 	return (
-		<Restaurant>
+		<Restaurant onClick={onClick}>
 			<RestaurantInfo>
 				<Title>{restaurant.name}</Title>
 				<ReactStars count={5} value={4.5} isHalf activeColor="#e7711c" />

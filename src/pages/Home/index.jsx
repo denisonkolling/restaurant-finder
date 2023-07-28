@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-	Container,
-	Search,
-	Logo,
-	Button,
-	Wrapper,
-	CarouselTitle,
-	Carousel,
-} from './style';
+import { 	Container,	Search,	Logo,	Button,	Wrapper,	CarouselTitle,	Carousel,} from './style';
 import logo from '../../assets/logo.svg';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
@@ -22,7 +14,8 @@ const Home = () => {
 	const [value, setValue] = useState('');
 	const [query, setQuery] = useState(null);
 	const [modalOpened, setModalOpened] = useState(false);
-	const { restaurants } = useSelector((state) => state.restaurants);
+	const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
+	const [placeId, setPlaceId] = useState(null);
 
 	const settings = {
 		dots: false,
@@ -44,6 +37,11 @@ const Home = () => {
 		setQuery(value);
 	}
 
+	function handleOpenModal(placeId) {
+		setPlaceId(placeId);
+		setModalOpened(true);
+	}
+
 	return (
 		<Wrapper>
 			<Container>
@@ -61,19 +59,29 @@ const Home = () => {
 						</Button>
 						<CarouselTitle>Na sua Área</CarouselTitle>
 						<Carousel {...settings}>
-							{restaurants.map((restaurant)=> (
-								<Card key={restaurant.place_id} photo={restaurant.photos ? restaurant.photos[0].getUrl() : image} title={restaurant.name}/>
+							{restaurants.map((restaurant) => (
+								<Card
+									key={restaurant.place_id}
+									photo={
+										restaurant.photos ? restaurant.photos[0].getUrl() : image
+									}
+									title={restaurant.name}
+								/>
 							))}
 						</Carousel>
 						<button onClick={() => setModalOpened(true)}>Abrir Modal</button>
 					</div>
 				</Search>
 				{restaurants.map((restaurant) => (
-					<RestaurantCard restaurant={restaurant} />
+					<RestaurantCard onClick={()=>handleOpenModal(restaurant.place_id)} restaurant={restaurant} />
 				))}
 			</Container>
-			<Map query={query} />
-			<Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
+			<Map query={query} placeId={placeId} />
+			<Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
+				<p>{restaurantSelected?.name}</p>
+				<p>{restaurantSelected?.formatted_phone_number}</p>
+				<p>{restaurantSelected?.formatted_address}</p>
+			</Modal>
 		</Wrapper>
 	);
 };
