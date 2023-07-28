@@ -1,34 +1,83 @@
-import React from "react";
-import GoogleMapReact from 'google-map-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import { setRestaurant, setRestaurants } from '../../redux/modules/restaurants';
 
-export default function Map(){
+export const MapContainer = (props) => {
+	const dispatch = useDispatch();
+	const { restaurants } = useSelector((state)=> state.restaurants)
+	const [map, setMap] = useState(null);
+	const { google, query } = props;
 
-  const defaultProps = {
-    center: {
-      lat: -27.59559,
-      lng: -48.55793
-    },
-    zoom: 11
-  };
+	useEffect(() => {
+		if (query) {
+			searchByQuery(query);
+		}
+	}, [query]);
 
-  return (
-    // Important! Always set the container height explicitly
-    <div style={{ height: '100vh', width: '100%' }}>
+	const searchByQuery = (query) => {
+		const service = new google.maps.places.PlacesService(map);
 
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_API_KEY }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-      >
-        {/* <AnyReactComponent
-          lat={-27.59559}
-          lng={-48.55793}
-          text="My Point"
-        /> */}
-      </GoogleMapReact>
-    </div>
+		const request = {
+			location: map.center,
+			radius: '500',
+			type: ['restaurant'],
+			query,
+		};
 
-  );
-}
+		service.textSearch(request, (results, status) => {
+			if (status === google.maps.places.PlacesServiceStatus.OK) {
+				console.log('restaurants', results);
+				dispatch(setRestaurants(results));
+			}
+		});
+	};
+
+	const searchNearby = (map, center) => {
+		const service = new google.maps.places.PlacesService(map);
+
+		const request = {
+			location: center,
+			radius: '10000',
+			type: ['restaurant'],
+		};
+
+		service.nearbySearch(request, (results, status) => {
+			if (status === google.maps.places.PlacesServiceStatus.OK) {
+				console.log('restaurants', results);
+				dispatch(setRestaurants(results));
+			}
+		});
+	};
+
+	function onMapReady(_, map) {
+		setMap(map);
+		searchNearby(map, map.center);
+	}
+
+	return (
+		<Map
+			google={google}
+			centerAroundCurrentLocation
+			onReady={onMapReady}
+			onRecenter={onMapReady}
+			zoom={13}>
+			{restaurants.map((restaurant) => (
+				<Marker
+					key={restaurant.place_id}
+					name={restaurant.name}
+					position={{
+						lat: restaurant.geometry.location.lat(),
+						lng: restaurant.geometry.location.lng(),
+					}}
+				/>
+			))}
+		</Map>
+	);
+};
+
+export default GoogleApiWrapper({
+	apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
+	language: 'pt-BR',
+})(MapContainer);

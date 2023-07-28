@@ -1,17 +1,23 @@
 import React from 'react';
-import { Restaurant, RestaurantInfo, Title, Address, RestaurantPhoto } from './styles';
-import ReactStars from 'react-rating-stars-component'
+import {
+	Restaurant,
+	RestaurantInfo,
+	Title,
+	Address,
+	RestaurantPhoto,
+} from './styles';
+import ReactStars from 'react-rating-stars-component';
 import image from '../../assets/restaurante-fake.png';
 
-const RestaurantCard = () => {
+const RestaurantCard = ({ restaurant }) => {
 	return (
 		<Restaurant>
 			<RestaurantInfo>
-				<Title>Papa John's</Title>
-				<ReactStars count={5} value={4.5} isHalf activeColor='#e7711c'/>
-				<Address>Rua Santa Catarina, 654</Address>
+				<Title>{restaurant.name}</Title>
+				<ReactStars count={5} value={4.5} isHalf activeColor="#e7711c" />
+				<Address>{restaurant.formatted_address}</Address>
 			</RestaurantInfo>
-        <RestaurantPhoto src={image} alt='foto do restaurante' />
+			<RestaurantPhoto src={restaurant.photos ? restaurant.photos[0].getUrl() : image} alt="foto do restaurante" />
 		</Restaurant>
 	);
 };

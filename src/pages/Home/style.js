@@ -1,9 +1,11 @@
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import Slider from 'react-slick';
+
+
 
 export const Wrapper = styled.div`
 	display: flex;
-	flex-direction: row;
+	/* flex-direction: row; */
 `;
 
 export const Container = styled.aside`
@@ -24,10 +26,13 @@ export const Search = styled.section`
 export const Logo = styled.img`
 	margin-bottom: 15px;
 	width: 50%;
+	align-items: center;
+	margin-left: 65px;;
 `;
 export const Button = styled.button`
-	height: 55px;
+	height: 100%;
 	margin-left: 5px;
+	
 `;
 
 export const Map = styled.div`
@@ -38,8 +43,17 @@ export const Map = styled.div`
 
 export const Carousel = styled(Slider)`
 	.slick-slide {
-		margin-right: 16px;
+		margin-right: 30px;
+		height: 100%;
+		width: 360px;
 	}
+
+	.slick-track {
+		height: 100%;
+		width: 360px;
+		/* border: solid 1px red; */
+	}
+
 	`;
 
 export const CarouselTitle = styled.h1`

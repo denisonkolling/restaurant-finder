@@ -17,9 +17,9 @@ color: #ffffff;
 font-size: 16px;
 `;
 
-const ImageCard = ({ photo }) => (
+const ImageCard = ({ photo, title }) => (
 	<Card photo={photo}>
-		<Title>Restaurante</Title>
+		<Title>{title}</Title>
 	</Card>
 );
 
