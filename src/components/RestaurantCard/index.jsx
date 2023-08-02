@@ -8,8 +8,13 @@ import {
 } from './styles';
 import ReactStars from 'react-rating-stars-component';
 import image from '../../assets/restaurante-fake.png';
+import Skeleton from '../Skeleton';
+import { useState } from 'react';
 
 const RestaurantCard = ({ restaurant, onClick }) => {
+
+	const [imageLoaded, setImageLoaded] = useState(false);
+
 	return (
 		<Restaurant onClick={onClick}>
 			<RestaurantInfo>
@@ -17,7 +22,13 @@ const RestaurantCard = ({ restaurant, onClick }) => {
 				<ReactStars count={5} value={4.5} isHalf activeColor="#e7711c" />
 				<Address>{restaurant.formatted_address}</Address>
 			</RestaurantInfo>
-			<RestaurantPhoto src={restaurant.photos ? restaurant.photos[0].getUrl() : image} alt="foto do restaurante" />
+			<RestaurantPhoto
+				imageLoaded={imageLoaded}
+				src={restaurant.photos ? restaurant.photos[0].getUrl() : image}
+				onLoad={() => setImageLoaded(true)}
+				alt="foto do restaurante"
+			/>
+			{!imageLoaded && <Skeleton width="100px" height="100px" />}
 		</Restaurant>
 	);
 };
