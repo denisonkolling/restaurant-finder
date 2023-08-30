@@ -9,7 +9,10 @@ import {
 	Carousel,
 	ModalTitle,
 	ModalContent,
-} from './style';
+	Input,
+	InputWrapper,
+	StyledSearchIcon
+} from './styles';
 import logo from '../../assets/logo.svg';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
@@ -24,7 +27,7 @@ import {
 	Loader,
 	Skeleton,
 } from '../../components';
-import { Input } from '@material/react-text-field';
+// import { Input } from '@material/react-text-field';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Home = () => {
@@ -67,15 +70,16 @@ const Home = () => {
 				<Search>
 					<Logo src={logo} alt="logo restaurante" />
 					<div>
+						<InputWrapper>
 						<Input
-							type="text"
-							value={value}
-							onKeyDown={handleKeyDown}
-							onChange={(e) => setValue(e.target.value)}
-						/>
-						<Button>
-							<SearchIcon onClick={handleClickSearch} />
-						</Button>
+								type="text"
+								value={value}
+								placeholder="Encontre um restaurante..."
+								onKeyDown={handleKeyDown}
+								onChange={(e) => setValue(e.target.value)}
+							/>
+							<StyledSearchIcon onClick={handleClickSearch}/>
+						</InputWrapper>
 						{restaurants.length > 0 ? (
 							<>
 								<CarouselTitle>Na sua Área</CarouselTitle>
