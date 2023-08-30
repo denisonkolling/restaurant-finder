@@ -4,7 +4,6 @@ import SearchIcon from '@mui/icons-material/Search';
 
 export const Wrapper = styled.div`
 	display: flex;
-	/* flex-direction: row; */
 `;
 
 export const Container = styled.aside`
@@ -49,7 +48,6 @@ export const Carousel = styled(Slider)`
 	.slick-track {
 		height: 100%;
 		width: 360px;
-		/* border: solid 1px red; */
 	}
 `;
 
@@ -111,3 +109,8 @@ export const StyledSearchIcon = styled(SearchIcon)`
 	bottom: 13px;
 	cursor: pointer;
 `;
+
+export const MapContainer = styled.div`
+width: 500px;
+height: 500px;
+`

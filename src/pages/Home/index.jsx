@@ -3,7 +3,6 @@ import {
 	Container,
 	Search,
 	Logo,
-	Button,
 	Wrapper,
 	CarouselTitle,
 	Carousel,
@@ -11,14 +10,11 @@ import {
 	ModalContent,
 	Input,
 	InputWrapper,
-	StyledSearchIcon
+	StyledSearchIcon,
 } from './styles';
 import logo from '../../assets/logo.svg';
-import { TextField } from '@mui/material';
 import { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
 import image from '../../assets/restaurante-fake.png';
-import Slider from 'react-slick';
 import {
 	Card,
 	RestaurantCard,
@@ -27,8 +23,7 @@ import {
 	Loader,
 	Skeleton,
 } from '../../components';
-// import { Input } from '@material/react-text-field';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
 	const [value, setValue] = useState('');
@@ -71,14 +66,14 @@ const Home = () => {
 					<Logo src={logo} alt="logo restaurante" />
 					<div>
 						<InputWrapper>
-						<Input
+							<Input
 								type="text"
 								value={value}
 								placeholder="Encontre um restaurante..."
 								onKeyDown={handleKeyDown}
 								onChange={(e) => setValue(e.target.value)}
 							/>
-							<StyledSearchIcon onClick={handleClickSearch}/>
+							<StyledSearchIcon onClick={handleClickSearch} />
 						</InputWrapper>
 						{restaurants.length > 0 ? (
 							<>
@@ -109,12 +104,16 @@ const Home = () => {
 					/>
 				))}
 			</Container>
-			<Map query={query} placeId={placeId} />
+			<div style={{	width: '80%', height: '100%', position: 'absolute',	marginLeft: '380px'}}>
+				<Map query={query} placeId={placeId} />
+			</div>
 			<Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
 				{restaurantSelected ? (
 					<>
 						<ModalTitle>{restaurantSelected?.name}</ModalTitle>
-						<ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
+						<ModalContent>
+							{restaurantSelected?.formatted_phone_number}
+						</ModalContent>
 						<ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
 						<ModalContent>
 							{restaurantSelected?.opening_hours?.open_now

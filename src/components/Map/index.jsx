@@ -22,7 +22,6 @@ export const MapContainer = (props) => {
 	}, [placeId]);
 
 	function getRestaurantById(placeId) {
-
 		const service = new google.maps.places.PlacesService(map);
 		dispatch(setRestaurant(null));
 
@@ -83,13 +82,24 @@ export const MapContainer = (props) => {
 		searchNearby(map, map.center);
 	}
 
+	const containerStyle = {
+		position: 'relative',  
+		width: '100%',
+		height: '100%'
+	}
+
 	return (
+
 		<Map
+			// className="mapContainerWrapper"
 			google={google}
 			centerAroundCurrentLocation
 			onReady={onMapReady}
 			onRecenter={onMapReady}
 			zoom={13}
+			// containerStyle={containerStyle}
+			// size={400, 400}
+			// style={{width: '80vw', height: '100vh'}}
 			{...props}>
 			{restaurants.map((restaurant) => (
 				<Marker
@@ -101,6 +111,14 @@ export const MapContainer = (props) => {
 					}}
 				/>
 			))}
+			{/* <style jsx>{`
+				.mapContainerWrapper {
+					position: relative !important;
+				}
+				.mapContainerWrapper div:first-child {
+					position: relative !important;
+				}
+			`}</style> */}
 		</Map>
 	);
 };
